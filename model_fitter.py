@@ -6,7 +6,7 @@ import joblib
 from config import MODEL_FILE_NAME
 
 
-def fit_model():
+def fit_model(use_sample=False):
     data_dir = "movie_reviews"
 
     documents, labels = [], []
@@ -18,8 +18,10 @@ def fit_model():
                 labels.append(next(f))
                 documents.append(f.read())
 
-    documents = documents[:1000]
-    labels = labels[:1000]
+    if use_sample:
+        documents = documents[:1000]
+        labels = labels[:1000]
+
     labels_binary = ["positive" if int(l) >= 7 else "negative" for l in labels]
     model = make_pipeline(CountVectorizer(), LogisticRegression())
     model.fit(documents, labels_binary)
