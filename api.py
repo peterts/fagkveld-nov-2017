@@ -15,7 +15,7 @@ def predict():
     return jsonify({"predictions": list(predictions)})
 
 if __name__ == "__main__":
-    if not os.path.exøists(MODEL_FILE_NAME):
+    if not os.path.exists(MODEL_FILE_NAME):
         print("Fitting model")
         fit_model()
     model = joblib.load(MODEL_FILE_NAME)
